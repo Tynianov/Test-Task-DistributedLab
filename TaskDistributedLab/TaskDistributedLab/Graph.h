@@ -3,6 +3,8 @@
 #include<stack>
 #include"Edge.h"
 
+typedef std::pair<double, Time> BestLeg;
+
 bool isVectorContains(std::vector<int>, int);
 Edge * finMinLeg(std::vector<Edge*>, int, int);
 
@@ -10,7 +12,7 @@ class Graph
 {
 	std::vector<int> vertices;
 	std::vector<Edge*> edges;
-	double **shortesDistanceMatrix;
+	BestLeg **shortesDistanceMatrix;
 	int **path;
 	Edge **legs;
 

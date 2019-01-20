@@ -121,17 +121,21 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="TrainLeg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="TrainLeg.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="data.xml" />
+    <Xml Include="data.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

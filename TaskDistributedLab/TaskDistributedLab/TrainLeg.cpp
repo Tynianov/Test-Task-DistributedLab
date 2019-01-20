@@ -1,7 +1,7 @@
 #include "TrainLeg.h"
 
 TrainLeg::TrainLeg(	int _tId, int _depStatID, int _arrStatID, 
-					double _price, std::string _arrTime, std::string _depTime) : trainId(_tId),
+					double _price, std::string _arrTime, std::string  _depTime) : trainId(_tId),
 																				 departureStationId(_depStatID),
 																				 arrivalStationId(_arrStatID),
 																				 price(_price),
@@ -20,12 +20,6 @@ TrainLeg::TrainLeg(	int _tId, int _depStatID, int _arrStatID,
 
 	if (!_price)
 		throw std::logic_error("Price of the ticket can't be negative");
-
-	if (!_arrTime.length())
-		throw std::logic_error("Incorrect time format!");
-
-	if (!_depTime.length())
-		throw std::logic_error("Incorrect time format!");
 }
 
 std::ostream & operator<<(std::ostream & stream, const TrainLeg & trainLeg) {

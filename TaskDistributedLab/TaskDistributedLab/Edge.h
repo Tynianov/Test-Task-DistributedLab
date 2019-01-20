@@ -7,19 +7,21 @@ class Edge
 	int toVertex;
 	double price;
 	int trainID;
-	std::string arrivalTimeString;
-	std::string departureTimeString;
+	Time arrivalTimeString;
+	Time departureTimeString;
+	Time totalTime;
 
 public:
 	Edge();
-	Edge(int, int, double, int, std::string, std::string);
+	Edge(int, int, double, int, Time, Time);
 
 	int getFromVertex() const;
 	int getToVertex() const;
 	double getPrice() const;
 	int getTrainID() const;
-	std::string getDepTime() const;
-	std::string getArrTime() const;
+	Time getDepTime() const;
+	Time getArrTime() const;
+	Time getTotalTime() const;
 
 	Edge & operator=(const Edge&);
 };
@@ -46,13 +48,18 @@ inline int Edge::getTrainID() const
 	return trainID;
 }
 
-inline std::string Edge::getDepTime() const
+inline Time Edge::getDepTime() const
 {
 	return departureTimeString;
 }
 
-inline std::string Edge::getArrTime() const
+inline Time Edge::getArrTime() const
 {
 	return arrivalTimeString;
+}
+
+inline Time Edge::getTotalTime() const
+{
+	return totalTime;
 }
 

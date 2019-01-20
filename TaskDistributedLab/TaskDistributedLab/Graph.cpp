@@ -5,7 +5,7 @@ Graph::Graph(std::vector<TrainLeg*> vec)
 	int arrStation, depStation, trainId;
 	double price;
 	int _size;
-	std::string arrivalTimeString, departureTimeString;
+	Time arrivalTimeString, departureTimeString;
 
 	for (int i = 0; i < vec.size(); i++) {
 		depStation = vec[i]->getDepartureStationId();
@@ -25,19 +25,21 @@ Graph::Graph(std::vector<TrainLeg*> vec)
 		edges.push_back(new Edge(depStation, arrStation, price, trainId, departureTimeString, arrivalTimeString));
 	}
 
-	shortesDistanceMatrix = new double*[_size];
+	shortesDistanceMatrix = new BestLeg*[_size];
 	path = new int*[_size];
 	legs = new Edge*[_size];
 
 	for (int i = 0; i < _size; i++) {
-		shortesDistanceMatrix[i] = new double[_size];
+		shortesDistanceMatrix[i] = new BestLeg[_size];
 		path[i] = new int[_size];
 		legs[i] = new Edge[_size];
 	}
 
 	for (int i = 0; i < _size; i++)
-		for (int j = 0; j < _size; j++)
-			shortesDistanceMatrix[i][j] = INFINITY;
+		for (int j = 0; j < _size; j++) {
+			shortesDistanceMatrix[i][j].first = INFINITY;
+			//shortesDistanceMatrix[i][j].second = Time();
+		}
 }
 
 Graph::~Graph()
@@ -65,15 +67,17 @@ void Graph::allShortestPath() {
 		for (int j = 0; j < _size; j++) {
 			edge = *(finMinLeg(edges, vertices[i], vertices[j]));
 			if (vertices[i] != vertices[j] && edge.getPrice() != INFINITY) {
-				shortesDistanceMatrix[i][j] = edge.getPrice();
+				shortesDistanceMatrix[i][j].first = edge.getPrice();
+				shortesDistanceMatrix[i][j].second = edge.getTotalTime();
 				legs[i][j] = edge;
 				path[i][j] = i;
 			}
 
 			else {
-				shortesDistanceMatrix[i][j] = INFINITY;
+				shortesDistanceMatrix[i][j].first = INFINITY;
+				shortesDistanceMatrix[i][j].second = Time();
 				path[i][j] = -1;
-				legs[i][j] = *new Edge(1, 1, INFINITY, 1, " ", " ");
+				legs[i][j] = *new Edge(1, 1, INFINITY, 1, Time(), Time());
 			}
 		}
 	}
@@ -81,11 +85,13 @@ void Graph::allShortestPath() {
 	for (int k = 0; k < _size; k++)
 		for (int i = 0; i < _size; i++)
 			for (int j = 0; j < _size; j++) {
-				if (shortesDistanceMatrix[i][k] == INFINITY || shortesDistanceMatrix[k][j] == INFINITY)
+				if (shortesDistanceMatrix[i][k].first == INFINITY || shortesDistanceMatrix[k][j].first == INFINITY)
 					continue;
 
-				if (shortesDistanceMatrix[i][j] > shortesDistanceMatrix[i][k] + shortesDistanceMatrix[k][j]) {
-					shortesDistanceMatrix[i][j] = shortesDistanceMatrix[i][k] + shortesDistanceMatrix[k][j];
+				if (shortesDistanceMatrix[i][j].first > shortesDistanceMatrix[i][k].first + shortesDistanceMatrix[k][j].first && 
+					shortesDistanceMatrix[i][j].second > shortesDistanceMatrix[i][k].second + shortesDistanceMatrix[k][j].second) {
+					shortesDistanceMatrix[i][j].first = shortesDistanceMatrix[i][k].first + shortesDistanceMatrix[k][j].first;
+					shortesDistanceMatrix[i][j].second = shortesDistanceMatrix[i][k].second + shortesDistanceMatrix[k][j].second;
 					path[i][j] = path[k][j];
 					legs[i][j] = legs[k][j];
 				}
@@ -106,7 +112,8 @@ void Graph::printPath(int start,int end)
 		std::cout << "No actual path between " << vertices[start] << " and " << vertices[end] << std::endl;
 
 	else
-		std::cout << vertices[start] << " -> " << vertices[end] << "\tPrice: " << shortesDistanceMatrix[start][end] << std::endl;
+		std::cout	<< vertices[start] << " -> " << vertices[end] << "\tPrice: " << shortesDistanceMatrix[start][end].first
+					<< "\tTotal time in road: " << shortesDistanceMatrix[start][end].second << std::endl;
 
 	Edge e;
 	std::stack<int> stack;
@@ -148,11 +155,13 @@ bool isVectorContains(std::vector<int> vec, int element)
 Edge * finMinLeg(std::vector<Edge*> edges,int fromVert, int toVert)
 {
 	double minPrice = INT_MAX;
+	Time minTime;
 	Edge *e = new Edge();
 	for (int i = 0; i < edges.size(); i++)
 		if (edges[i]->getFromVertex() == fromVert && edges[i]->getToVertex() == toVert) {
-			if (edges[i]->getPrice() < minPrice) {
+			if (edges[i]->getPrice() < minPrice && edges[i]->getTotalTime() < minTime) {
 				minPrice = edges[i]->getPrice();
+				minTime = edges[i]->getTotalTime();
 				e = edges[i];
 			}
 		}

@@ -1,5 +1,6 @@
 #include"Graph.h"
 #include"tinyxml2.h"
+#include"Time.h"
 
 void readXMLFile(const char*, std::vector<TrainLeg*>&); 
 
@@ -23,6 +24,20 @@ int main() {
 	{
 		std::cout << e.what() << std::endl;
 	}
+
+	/*
+	Time t1("01:00:00");
+	Time t2("10:01:00");
+	Time t;
+	//Time t3 = t1 - t2; 
+	//Time t4("24:00:00"); 
+	//t4 -= t3;
+	//std::cout << t4;
+	/*Edge e(10, 11, 100.0, 20, t1, t2);
+	std::cout << e << std::endl;
+	std::cout << e.getTotalTime();
+	std::cout << (t > t1);
+	*/
 
 	system("pause");
 	return 0;

@@ -1,7 +1,6 @@
 #pragma once
 #include<string>
-#include<iostream>
-
+#include"Time.h"
 
 class TrainLeg
 {
@@ -9,20 +8,20 @@ class TrainLeg
 	const int departureStationId;
 	const int arrivalStationId;
 	const double price;
-	const std::string arrivalTimeString;
-	const std::string departureTimeString;
+	Time arrivalTimeString;
+	Time departureTimeString;
 
 	TrainLeg(const TrainLeg&);
 	TrainLeg & operator = (const TrainLeg&);
 public:
-	TrainLeg(int,int,int,double,std::string,std::string);
+	TrainLeg(int, int, int, double, std::string, std::string);
 
 	int getTrainId() const;
 	int getDepartureStationId() const;
 	int getArrivalStationId() const;
 	double getPrice() const;
-	std::string getArrivalTimeString() const;
-	std::string getDepartureTimeString() const;
+	Time getArrivalTimeString() const;
+	Time getDepartureTimeString() const;
 
 };
 
@@ -47,12 +46,12 @@ inline double TrainLeg::getPrice() const
 	return price;
 }
 
-inline std::string TrainLeg::getArrivalTimeString() const
+inline Time TrainLeg::getArrivalTimeString() const
 {
 	return arrivalTimeString;
 }
 
-inline std::string TrainLeg::getDepartureTimeString() const
+inline Time TrainLeg::getDepartureTimeString() const
 {
 	return departureTimeString;
 }
