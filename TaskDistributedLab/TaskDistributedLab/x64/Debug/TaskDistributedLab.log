@@ -1,15 +1,6 @@
-﻿  Edge.cpp
-  Graph.cpp
+﻿  Graph.cpp
 d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.h(31): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
 d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.h(35): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
 d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.cpp(17): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.cpp(63): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  Source.cpp
-d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.h(31): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.h(35): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-  Time.cpp
-  TrainLeg.cpp
-  Создание кода...
-d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\time.cpp(99): warning C4172: возвращение адреса локальной или временной переменной : res
-d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\time.cpp(52): warning C4172: возвращение адреса локальной или временной переменной : res
+d:\github\test-task-distributedlab\taskdistributedlab\taskdistributedlab\graph.cpp(62): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   TaskDistributedLab.vcxproj -> D:\GitHub\Test-Task-DistributedLab\TaskDistributedLab\x64\Debug\TaskDistributedLab.exe
