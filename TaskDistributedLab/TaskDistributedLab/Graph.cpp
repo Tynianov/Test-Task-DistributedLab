@@ -81,22 +81,6 @@ void Graph::allShortestPath() {
 		}
 	}
 
-	//for (int k = 0; k < _size; k++)
-	//	for (int i = 0; i < _size; i++)
-	//		for (int j = 0; j < _size; j++) {
-	//			if (shortesDistanceMatrix[i][k].first == INFINITY || shortesDistanceMatrix[k][j].first == INFINITY)
-	//				continue;
-
-	//			if (shortesDistanceMatrix[i][j].first > shortesDistanceMatrix[i][k].first + shortesDistanceMatrix[k][j].first && 
-	//				shortesDistanceMatrix[i][j].second > shortesDistanceMatrix[i][k].second + shortesDistanceMatrix[k][j].second) {
-	//				shortesDistanceMatrix[i][j].first = shortesDistanceMatrix[i][k].first + shortesDistanceMatrix[k][j].first;
-	//				shortesDistanceMatrix[i][j].second = shortesDistanceMatrix[i][k].second + shortesDistanceMatrix[k][j].second;
-	//				shortesDistanceMatrix[i][j].second += legs[k][j].getDepTime() - legs[i][k].getArrTime();
-	//				path[i][j] = path[k][j];
-	//				legs[i][j] = legs[k][j];
-	//			}
-	//		}
-
 	for (int k = 0; k < _size; k++)
 		for (int i = 0; i < _size; i++)
 			if (shortesDistanceMatrix[i][k].first != INFINITY) {
